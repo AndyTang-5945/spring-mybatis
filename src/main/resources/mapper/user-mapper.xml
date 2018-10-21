@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhxx.spring.mybatis.dao.UserDao">
+    <insert keyColumn="id" useGeneratedKeys="true" keyProperty="id" id="save" parameterType="userMapper">
+        INSERT INTO t_s_user (username, sex, password) VALUES  (#{username}, #{sex}, #{password})
+    </insert>
+
+    <select id="findById" resultType="com.hhxx.spring.mybatis.entity.UserMapper" parameterType="_long">
+        SELECT * FROM t_s_user u WHERE u.id = #{id}
+    </select>
+
+    <update  id="update" parameterType="userMapper">
+
+        UPDATE t_s_user
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="sex != null">
+                sex = #{sex}
+            </if>
+        </set>
+        WHERE
+        <if test="id != null">
+          id=#{id}
+        </if>
+    </update>
+</mapper>

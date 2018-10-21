@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--Spring组件扫描器
+            注解的处理器可以单个配置  但是我们可以使用spring框架的组件扫描的方式来配置
+    base-package:需要扫描哪个包下面的处理器
+     -->
+    <context:component-scan base-package="com.hhxx.spring.mybatis.**"></context:component-scan>
+    <!-- 可代替上面注解的处理器和处理器适配器的配置 建议使用 -->
+    <mvc:annotation-driven />
+    <!-- 视图解析器 -->
+    <!-- 解析jsp 默认使用jstl标签 classpath下得有jstl包 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 配置jsp路径的前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+
+
+    <!-- 查 找 类 路 径 下 的 映 射 器 并 自 动 将 它 们 创 建 成 MapperFactoryBean -->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        &lt;!&ndash;sqlSessionFactoryBeanName="sqlSessionFactory"
+        basePackage="com.artisan.dao.mybatis"&ndash;&gt;
+    </bean>-->
+
+
+
+    <!-- 暂未用到事务 -->
+    <!-- Spring的事务管理器
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource"/>-->
+
+    <!-- 开启事务注解
+    <tx:annotation-driven transaction-manager="transactionManager"/>-->
+</beans>
